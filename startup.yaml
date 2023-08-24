@@ -1,0 +1,28 @@
+#cloud-config
+datasource:
+ Ec2:
+  strict_id: false
+ssh_pwauth: no
+users:
+- name: yc-user
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBwTK34pPoG7jhEDDdpS2yw9TG1oCY+WVw/9VbPgBdr0DraNi16bxqXE+bYoKQ3/OIZBwgXhnKlfK/eyL3KBVYQa857Zh3Gxl+w44DAl878JRc36C8bLK0BDZIu+iUqhZrhYEYZDrbqSwSqdLSTePDl4a8lR1Zeji2pcOKonn2Nc6K8sBuTYoE6h2/xsOjqXZH/OAceJaGZlZjht1eo+7VMHQHdnXLimPop6G+g+LnA+CJff4MhdUTbO9iNoC2tPnuIqLzncwcKIotXVj35lfYeFsivB7HVERHYFT5v2JBiW8rKIDCjsfcsT9Fg4qEF9FguosJmk916d+IMLVAlwUrwO8/BsuyApspIZfcK5USc4vj4BCoRTAKGQbDi2rByqLr+pKjMHQGj3R0JMDFRb3raSFrhxnqPjsqnq896zrOd8EcZnYi9ruu5PlnnyIP3TSs20BdQ2dGJ11wFIiLANU1lof9U4zdzixln/EudrKAW/nqffqVQgiD8q6iu4PE3rk= appuser
+write_files:
+- path: /home/yc-user/startup-script.sh
+  permissions: 0o755
+  content: |
+   #!/bin/bash
+   sudo apt update
+   sudo apt install -y ruby-full ruby-bundler build-essential
+   sudo apt install mongodb -y
+   sudo systemctl start mongodb
+   sudo systemctl enable mongodb
+   sudo apt install git -y
+   cd ~
+   git clone -b monolith https://github.com/express42/reddit.git
+   cd reddit && bundle install
+   puma -d
+runcmd:
+- /home/yc-user/startup-script.sh
