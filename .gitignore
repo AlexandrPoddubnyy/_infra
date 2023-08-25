@@ -1,5 +1,6 @@
 
 variables.pkr.hcl
+variables.json
 
 #__pycache__/
 #*.xlsx
