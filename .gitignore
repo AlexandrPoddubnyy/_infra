@@ -1,0 +1,7 @@
+
+variables.pkr.hcl
+
+#__pycache__/
+#*.xlsx
+#*lock.*.xlsx\#
+#config.yml
