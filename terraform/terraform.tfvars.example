@@ -1,0 +1,8 @@
+service_account_key_file = "/path/to/key.json"
+cloud_id                 = "bsaaaaaaaaaaaaaaa"
+folder_id                = "bbbbbbbbbbbbbbbbb"
+zone                     = "ruddddddddddddddd"
+subnet_id                = "e9beeeeeeeeeeeeeee"
+image_id                 = "fdffffffffffffffffffffff"
+public_key_path          = "/path/to/ssh_key.pub"
+private_key_path         = "/path/to/ssh_key"
