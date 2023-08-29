@@ -2,7 +2,15 @@
 variables.pkr.hcl
 variables.json
 
-#__pycache__/
-#*.xlsx
-#*lock.*.xlsx\#
-#config.yml
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
+
+terraform.tfvars
+
+__pycache__/
+*.xlsx
+*lock.*.xlsx\#
+config.yml
