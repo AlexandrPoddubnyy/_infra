@@ -9,6 +9,8 @@ variables.json
 .terraform/
 
 terraform.tfvars
+.terraform.lock.hcl
+
 
 __pycache__/
 *.xlsx
