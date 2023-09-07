@@ -6,5 +6,5 @@ subnet_id                = "e9beeeeeeeeeeeeeee"
 image_id                 = "fdffffffffffffffffffffff"
 public_key_path          = "ssh_key.pub.example"
 private_key_path         = "ssh_key.example"
-app_count                = 2
+app_count                = 1
 platform_id              = "standard-v3"
