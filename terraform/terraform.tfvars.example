@@ -8,3 +8,5 @@ public_key_path          = "ssh_key.pub.example"
 private_key_path         = "ssh_key.example"
 app_count                = 1
 platform_id              = "standard-v3"
+app_disk_image           = "wwwwwwwrih6nlbqqqqqq"
+db_disk_image            = "wwwwwwrcera6i5qqqqqq"
