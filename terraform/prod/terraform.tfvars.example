@@ -1,0 +1,13 @@
+service_account_key_file = "key.json.example"
+cloud_id                 = "bsaaaaaaaaaaaaaaa"
+folder_id                = "bbbbbbbbbbbbbbbbb"
+zone                     = "ruddddddddddddddd"
+subnet_id                = "e9beeeeeeeeeeeeeee"
+image_id                 = "fdffffffffffffffffffffff"
+public_key_path          = "ssh_key.pub.example"
+private_key_path         = "ssh_key.example"
+app_count                = 1
+platform_id              = "standard-v3"
+app_disk_image           = "wwwwwwwrih6nlbqqqqqq"
+db_disk_image            = "wwwwwwrcera6i5qqqqqq"
+environment              = "prod"
