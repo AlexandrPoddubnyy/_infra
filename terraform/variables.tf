@@ -26,3 +26,9 @@ variable "subnet_id" {
 variable "service_account_key_file" {
   description = "key .json"
 }
+variable "app_count" {
+  description = "count instances for app"
+}
+variable "platform_id" {
+  description = "Platform . See https://cloud.yandex.ru/docs/compute/concepts/vm-platforms"
+}
