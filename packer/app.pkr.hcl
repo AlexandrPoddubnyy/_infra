@@ -19,7 +19,7 @@ source "yandex" "ubuntu16" {
   service_account_key_file =  "${var.service_account_key_file}"
   folder_id = "${var.folder_id}"
   source_image_family = "${var.source_image_family}"
-  image_name = "ruby-base-Q${formatdate("MM-DD-YYYY", timestamp())}"
+  image_name = "ruby-base-${formatdate("MM-DD-YYYY", timestamp())}"
   image_family = "ruby-base"
   ssh_username =  "${var.ssh_username}"
   platform_id = "standard-v1"

@@ -5,7 +5,7 @@
               "service_account_key_file": "{{user `service_account_key_file`}}",
               "folder_id": "{{user `folder_id`}}",
               "source_image_family": "{{user `source_image_family`}}",
-              "image_name": "ruby-basejson-Q${formatdate(\"MM-DD-YYYY\", timestamp())}",
+              "image_name": "ruby-basejson-${formatdate(\"MM-DD-YYYY\", timestamp())}",
               "image_family": "ruby-basejson",
               "ssh_username": "{{user `ssh_username`}}",
               "platform_id": "standard-v1",
