@@ -51,3 +51,8 @@ variable app_disk_image {
 #  description = "Disk image for reddit db"
 #  default = "reddit-db-base"
 #}
+
+variable "environment" {
+  description = "Production environment. Example: prod, stage, dev, test ..."
+  default     = "test"
+}

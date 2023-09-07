@@ -3,9 +3,10 @@ resource "yandex_compute_instance" "db" {
 #  count       = var.app_count
   count       = 1
   platform_id = var.platform_id
-  name = "reddit-db-${count.index}"
-
 #  name = "reddit-app"
+#  name = "reddit-db-${count.index}"
+  name = "reddit-db-${var.environment}-${count.index}"
+
   labels = {
 #    tags = "reddit-app"
     tags = "reddit-db"
