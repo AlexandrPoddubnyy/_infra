@@ -33,6 +33,7 @@ build {
       "echo 'updating APT'",
       "sudo apt-get update -y",
       "sleep 10",
+      "while [ -n \"$(pgrep apt-get)\" ]; do sleep 1; i=$((i+1)); echo $i ; done",
       "echo 'install mongodb'",
       "sudo apt-get install -y mongodb",
       "sudo systemctl enable mongodb",

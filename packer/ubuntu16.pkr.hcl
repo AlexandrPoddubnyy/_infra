@@ -33,6 +33,7 @@ build {
       "echo 'updating APT'",
       "sudo apt-get update -y",
       "sleep 10",
+      "while [ -n \"$(pgrep apt-get)\" ]; do sleep 1; i=$((i+1)); echo $i ; done",
       "echo 'install ruby'",
       "sudo apt-get install -y ruby-full ruby-bundler build-essential",
       "sleep 10",
