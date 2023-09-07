@@ -17,10 +17,10 @@ variable "public_key_path" {
   description = "Path to the public key used for ssh access"
 }
 
-#variable "private_key_path" {
-#  # Описание переменной
-#  description = "Path to the private key used for ssh access for provisioning"
-#}
+variable "private_key_path" {
+  # Описание переменной
+  description = "Path to the private key used for ssh access for provisioning"
+}
 
 #variable "image_id" {
 #  description = "Disk image"
@@ -42,9 +42,9 @@ variable "platform_id" {
   description = "Platform . See https://cloud.yandex.ru/docs/compute/concepts/vm-platforms"
 }
 
-variable app_disk_image {
+variable "app_disk_image" {
   description = "Disk image for reddit app"
-  default = "reddit-app-base"
+  default     = "reddit-app-base"
 }
 
 #variable db_disk_image {
@@ -55,4 +55,8 @@ variable app_disk_image {
 variable "environment" {
   description = "Production environment. Example: prod, stage, dev, test ..."
   default     = "test"
+}
+
+variable "db_ip" {
+  description = "database ip"
 }
