@@ -108,3 +108,52 @@ AlexandrPoddubnyy Infra repository
 
 ## Как проверить работоспособность:
 	Например, перейти по ссылке http://http://158.160.47.200:9292/
+
+
+====================
+Домашнее задание №7:
+====================
+
+## В процессе сделано:
+    1. Подготовка ветки terraform-2, перенос lb.tf и тп
+    2. Добавление ресурсов сети, terraform validate, корректировка outputs.tf , terraform destroy
+    3. Добавление сети в вм. Траблшутинг, увеличение лимита сетей в YC через поддержку и тп
+    4. Подготовка файлов для сборки образов и сборка
+
+	> cd packer
+	> packer build -var-file=variables.pkr.hcl db.pkr.hcl
+	> packer build -var-file=variables.pkr.hcl app.pkr.hcl
+
+    5. Разбивка конфигурации терраформ на отдельные файлы для app, db и тп. Проверка vm, по.
+    6. Модули. разбирательство с ошибками инициализации , документация у hashicorp yc, stackoverflow и тп. Вариантов не найдено.
+       Дебаггинг и тп. Итого, догадка-решение:  опять же config.tf в каждую папку с модулями
+    7. Применнение конфигурации с модулями и тесты.
+    8. Создание конфигуруций и инициализация stage и prod, параметризирорование, проверки.
+    9. Удаление файлов со старых мест размешения, Destroy окружений.
+    10. Прогоны, проверки тестов в github, корректировки для прохождения тестов.
+
+	> cd terraform/stage ;  terraform init ; terraform apply
+	> cd terraform/prod  ;  terraform init ; terraform apply
+
+    11. (*) Вопрос хранения state в удаленном бакенде.
+        Описано в backend.tf / config.tf.example
+        Для инициализации:
+
+	> terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY"
+
+        После переноса конфигов (без state) в другие папки
+
+	> terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY" -reconfigure
+
+    12. (**) Задача настройки provisioner для app и db , для разных окружений
+        Рабочие файлы в папках окружений prod/stage, и модулей app/db
+
+
+## Как запустить проект:
+
+	>terraform/prod> terraform apply
+	>terraform/stage> terraform apply
+
+## Как проверить работоспособность:
+
+	Например, перейти по ссылке http://158.160.47.200:9292/

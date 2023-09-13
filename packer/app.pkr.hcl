@@ -19,8 +19,8 @@ source "yandex" "ubuntu16" {
   service_account_key_file =  "${var.service_account_key_file}"
   folder_id = "${var.folder_id}"
   source_image_family = "${var.source_image_family}"
-  image_name = "reddit-base-${formatdate("MM-DD-YYYY", timestamp())}"
-  image_family = "reddit-base"
+  image_name = "ruby-base-${formatdate("MM-DD-YYYY", timestamp())}"
+  image_family = "ruby-base"
   ssh_username =  "${var.ssh_username}"
   platform_id = "standard-v1"
   use_ipv4_nat = true
@@ -36,10 +36,6 @@ build {
       "while [ -n \"$(pgrep apt-get)\" ]; do sleep 1; i=$((i+1)); echo $i ; done",
       "echo 'install ruby'",
       "sudo apt-get install -y ruby-full ruby-bundler build-essential",
-      "sleep 10",
-      "echo 'install mongodb'",
-      "sudo apt-get install -y mongodb",
-      "sudo systemctl enable mongodb",
     ]
   }
 }
