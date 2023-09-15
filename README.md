@@ -157,3 +157,49 @@ AlexandrPoddubnyy Infra repository
 ## Как проверить работоспособность:
 
 	Например, перейти по ссылке http://158.160.47.200:9292/
+
+
+====================
+Домашнее задание №8:
+====================
+
+## В процессе сделано:
+    1 Установка Ansible
+    2 Знакомство с базовыми функциями и инвентори
+    3 Выполнение различных модулей на подготовленной в прошлых ДЗ инфраструктуре
+    4 Пишем простой плейбук
+    5 Задание со звездочкой (*) Динамический инвентори.
+      Для задания со сзвездочкой используется скрипт myinv.sh, минимальные данные скрипт берет из листинга >yc compute instance list
+
+## Как запустить проект:
+
+	Из хистори
+	> pip install -r requirements.txt
+	> ansible --version
+	> which ansible
+	>
+	> ansible appserver -i ./inventory -m ping
+	> ansible appserver,dbserver -i ./inventory -m ping
+	> ansible appserver,dbserver -m command -a uptime
+	>
+	> ansible all -m ping -i inventory.yml
+	>
+	> ansible app -m command -a 'ruby -v'
+	> ansible app -m command -a 'bundler -v'
+	> ansible app -m command -a 'ruby -v; bundler -v'
+	> ansible app -m shell -a 'ruby -v; bundler -v'
+	>
+	> ansible db -m command -a 'systemctl status mongodb'
+	> ansible db -m systemd -a name=mongodb
+	> ansible db -m service -a name=mongodb
+	>
+	> ansible app -m apt -a name=git
+	> ansible app -m git -a 'repo=https://github.com/express42/reddit.git dest=/home/appuser/reddit'
+	> ansible app -m command -a 'git clone https://github.com/express42/reddit.git /home/appuser/reddit'
+	>
+	> yc compute instance list
+	> ansible all -m ping
+
+## Как проверить работоспособность:
+
+	Например, перейти по ссылке http://158.160.47.200:9292/
