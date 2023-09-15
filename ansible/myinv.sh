@@ -4,7 +4,7 @@ if [ "$1" == "--list" ]; then
 
 tmplist=/tmp/ac_all_my_instance_list
 
-yc compute instance list > $tmplist
+#yc compute instance list > $tmplist
 
 echo '{
   "_meta": {
