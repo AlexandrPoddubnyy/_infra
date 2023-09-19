@@ -14,6 +14,10 @@ terraform.tfvars
 
 config.tf
 
+*.retry
+
+
+
 __pycache__/
 *.xlsx
 *lock.*.xlsx\#

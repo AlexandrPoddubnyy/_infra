@@ -5,7 +5,7 @@
               "service_account_key_file": "{{user `service_account_key_file`}}",
               "folder_id": "{{user `folder_id`}}",
               "source_image_family": "{{user `source_image_family`}}",
-              "image_name": "mongo-basejson-${formatdate(\"MM-DD-YYYY\", timestamp())}",
+              "image_name": "mongo-basejson-ansible-${formatdate(\"MM-DD-YYYY\", timestamp())}",
               "image_family": "mongo-basejson",
               "ssh_username": "{{user `ssh_username`}}",
               "platform_id": "standard-v1",
@@ -13,17 +13,9 @@
     }
   ],
   "provisioners": [
-    {
-      "type": "shell",
-      "inline": [
-                "echo 'updating APT'",
-                "sudo apt-get update -y",
-                "sleep 10",
-                "while [ -n \"$(pgrep apt-get)\" ]; do sleep 1; i=$((i+1)); echo $i ; done",
-                "echo 'install mongodb'",
-                "sudo apt-get install -y mongodb",
-                "sudo systemctl enable mongodb"
-      ]
-    }
+     {
+      "type": "ansible",
+      "playbook_file": "ansible/packer_db.yml"
+     }
   ]
 }

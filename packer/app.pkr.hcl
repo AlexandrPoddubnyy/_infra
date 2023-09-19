@@ -19,7 +19,7 @@ source "yandex" "ubuntu16" {
   service_account_key_file =  "${var.service_account_key_file}"
   folder_id = "${var.folder_id}"
   source_image_family = "${var.source_image_family}"
-  image_name = "ruby-base-${formatdate("MM-DD-YYYY", timestamp())}"
+  image_name = "ruby-base-ansible-${formatdate("MM-DD-YYYY", timestamp())}"
   image_family = "ruby-base"
   ssh_username =  "${var.ssh_username}"
   platform_id = "standard-v1"
@@ -28,14 +28,7 @@ source "yandex" "ubuntu16" {
 
 build {
   sources = ["source.yandex.ubuntu16"]
-  provisioner "shell" {
-    inline = [
-      "echo 'updating APT'",
-      "sudo apt-get update -y",
-      "sleep 10",
-      "while [ -n \"$(pgrep apt-get)\" ]; do sleep 1; i=$((i+1)); echo $i ; done",
-      "echo 'install ruby'",
-      "sudo apt-get install -y ruby-full ruby-bundler build-essential",
-    ]
+  provisioner "ansible" {
+     playbook_file = "ansible/packer_app.yml"
   }
 }
