@@ -32,7 +32,8 @@
     db_host: 10.128.0.11
   tasks:
     - name: Update repositories cache and install "git" package
-      ansible.builtin.apt:
+#      ansible.builtin.apt:
+      apt:
         name: git
         update_cache: yes
     - name: Add unit file for Puma
@@ -74,7 +75,8 @@
   become: true
   tasks:
     - name: Update repositories cache and install "git" package
-      ansible.builtin.apt:
+#      ansible.builtin.apt:
+      apt:
         name: git
         update_cache: yes
     - name: Fetch the latest version of application code

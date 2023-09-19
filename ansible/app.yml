@@ -6,7 +6,8 @@
     db_host: 10.128.0.9
   tasks:
     - name: Update repositories cache and install "git" package
-      ansible.builtin.apt:
+#      ansible.builtin.apt:
+      apt:
         name: git
         update_cache: yes
     - name: Add unit file for Puma

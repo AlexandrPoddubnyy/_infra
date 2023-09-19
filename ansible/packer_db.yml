@@ -6,7 +6,8 @@
 #    mongo_bind_ip: 0.0.0.0
   tasks:
     - name: Update repositories cache and install "mongodb" package
-      ansible.builtin.apt:
+#      ansible.builtin.apt:
+      apt:
         name: mongodb
         update_cache: yes
 #    - name: Change mongo config file
