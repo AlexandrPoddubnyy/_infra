@@ -1,0 +1,30 @@
+---
+- name: Provisioning mongoDB
+  hosts: all
+  become: true
+#  vars:
+#    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: Update repositories cache and install "mongodb" package
+      ansible.builtin.apt:
+        name: mongodb
+        update_cache: yes
+#    - name: Change mongo config file
+#      template:
+#        src: templates/mongod.conf.j2
+#        dest: /etc/mongod.conf
+#        mode: 0644
+#      notify: restart mongod
+    - name: enable mongodb
+      systemd: name=mongodb enabled=yes
+#    - name: Change mongoDB config file
+#      template:
+#        src: templates/mongodb.conf.j2
+#        dest: /etc/mongodb.conf
+#        mode: 0644
+#      notify: restart mongodb
+#  handlers:
+##    - name: restart mongod
+##      service: name=mongod state=restarted
+#    - name: restart mongodb
+#      service: name=mongodb state=restarted

@@ -203,3 +203,131 @@ AlexandrPoddubnyy Infra repository
 ## Как проверить работоспособность:
 
 	Например, перейти по ссылке http://158.160.47.200:9292/
+
+
+====================
+Домашнее задание №9:
+====================
+
+## В процессе сделано:
+
+    Кратко:
+    1. Подготовка git-а для работы с веткой ansible-2 , при условии что дз ansible-1 еще не принято, ветка предудущая не смержена.
+    2. Коммит с заремливанием кода провизионина приложения и дб через terraform-2 , задачния со *
+    3. Коммит с корректировкой .для ансибле
+    4. Работа по "Один playbook, один сценарий"
+    5. Работа по "Аналогично один плейбук, но много сценариев"
+    6. Работа по "И много плейбуков."
+    7. Работа по "Задание со ⭐ "
+    8. Работа по "Изменим провижн образов Packer на Ansible-плейбуки"
+    9. Работа по "Проверка ДЗ"
+
+    Чуть подробнее:
+    1. Подготовка git-а для работы с веткой ansible-2 , при условии что дз ansible-1 еще не принято, ветка предудущая не смержена.
+    2. Коммит с заремливанием кода провизионина приложения и дб через terraform-2 , задачния со *
+    3. Коммит с корректировкой .для ансибле
+    4. Один playbook, один сценарий
+        Плейбуки
+        Сценарий плейбука
+        Сценарий для MongoDB
+        Шаблон конфига MongoDB
+        Пробный, тестовый прогон
+            ansible-playbook reddit_app.yml --syntax-check
+            ansible-playbook reddit_app.yml --check
+            ansible-playbook reddit_app.yml --check --limit db
+        Определение переменных
+        Корректировка 2-х темплейтов для mongod и mongodb
+        Пробный прогон
+        Handlers
+        Добавим handlers
+        Применим плейбук
+            ansible-playbook  reddit_app.yml  --limit db
+        Настройка инстанса приложения
+        Unit для приложения
+        Добавим шаблон для приложения
+          + Информация о внутренних адресах выведена в output-переменные в Terraform
+        Настройка инстанса приложения
+          ansible-playbook reddit_app.yml --check --limit db --tags db-tag
+          ansible-playbook reddit_app.yml --check --limit app --tags app-tag
+          ansible-playbook reddit_app.yml --limit app --tags app-tag
+        Деплой
+        Выполняем деплой
+          ansible-playbook reddit_app.yml --check --limit app --tags deploy-tag
+          ansible-playbook reddit_app.yml --limit app --tags deploy-tag
+        Проверяем работу приложения
+     5. Аналогично один плейбук, но много сценариев
+        Один плейбук, несколько сценариев
+        Результат
+        Пересоздадим инфраструктуру
+        Проверим работу сценариев
+            ansible-playbook reddit_app2.yml --tags db-tag --check
+            ansible-playbook reddit_app2.yml --tags db-tag
+            ansible-playbook reddit_app2.yml --tags app-tag --check
+            ansible-playbook reddit_app2.yml --tags app-tag
+        Сценарий для деплоя
+            ansible-playbook reddit_app2.yml --tags app-tag
+        Проверка сценария
+            ansible-playbook reddit_app2.yml --tags deploy-tag --check
+     6. И много плейбуков.
+        Несколько плейбуков
+        db.yml
+        app.yml
+        deploy.yml
+        site.yml
+        Проверка результата
+            ansible-playbook site.yml --check
+            ansible-playbook site.yml
+        Проверка результата
+     7. Задание со ⭐
+        - Использовать dynamic inventory для Yandex Cloud в этом задании.  Готово. Работает с помошью inventory = ./myinv.sh
+        - Исследовать функционал keyed_groups -  исследована документация, информация из интернет и тп, действующих решений в проекте не исследовано.
+     8. Изменим провижн образов Packer на Ansible-плейбуки
+        Провижининг в Packer
+        Изменим провижининг в Packer
+        Самостоятельное задание
+            ansible-playbook --check packer_db.yml
+            ansible-playbook --check packer_app.yml
+        Интегрируем Ansible в Packer
+        Проверяем образы
+          Выполните билд образов с использованием нового провижинера.
+            packer validate -var-file=variables.pkr.hcl db.pkr.hcl
+            packer validate -var-file=variables.pkr.hcl app.pkr.hcl
+                Для настройки плагина понадобилось временно добавить в .hcl
+                ...
+                packer {
+                    required_plugins {
+                        ansible = {
+                            source  = "github.com/hashicorp/ansible"
+                            version = "~> 1"
+                        }
+                    }
+                }
+                ...
+                и сделать >packer init -var-file=variables.pkr.hcl app.pkr.hcl
+            AlexandrPoddubnyy_infra> packer validate -var-file=packer/variables.pkr.hcl packer/db.pkr.hcl
+            AlexandrPoddubnyy_infra> packer validate -var-file=packer/variables.pkr.hcl packer/app.pkr.hcl
+            packer build -var-file=packer/variables.pkr.hcl packer/db.pkr.hcl
+            packer build -var-file=packer/variables.pkr.hcl packer/app.pkr.hcl
+            yc compute image list
+          На основе созданных app и db образов запустите stage окружение
+            terraform/stage> terraform destroy
+            terraform/stage> terraform apply -auto-approve
+          Проверьте, что c помощью плейбука site.yml из предыдущего раздела окружение конфигурируется, а приложение деплоится и работает.
+            ansible> ansible-playbook site.yml --check
+            ansible> ansible-playbook site.yml
+     9. Проверка ДЗ
+            git commit
+            change README "внесите описание того, что сделано"
+
+## Как запустить проект:
+
+        >packer build -var-file=packer/variables.pkr.hcl packer/db.pkr.hcl
+        >packer build -var-file=packer/variables.pkr.hcl packer/app.pkr.hcl
+        >yc compute image list
+        terraform/stage> terraform destroy
+        terraform/stage> terraform apply -auto-approve
+        ansible> ansible-playbook site.yml
+
+## Как проверить работоспособность:
+
+        Например, перейти по ссылке http://158.160.33.224:9292/
