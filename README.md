@@ -331,3 +331,126 @@ AlexandrPoddubnyy Infra repository
 ## Как проверить работоспособность:
 
         Например, перейти по ссылке http://158.160.33.224:9292/
+
+
+====================
+Домашнее задание №10:
+====================
+
+## В процессе сделано:
+
+    Кратко:
+	ДЗ по теме: Ansible-3  Ansible: работа с ролями и окружениями
+	    // Переносим созданные плейбуки в раздельные роли
+	    // Описываем два окружения
+	    // Используем коммьюнити роль nginx
+	    // Используем Ansible Vault для наших окружений
+	    // Задание со  ⭐: Работа с динамическим инвентори/
+
+    Чуть подробнее:
+    Работа, просмотр по слайдам
+        Проект infra и проверка ДЗ
+            git branch ansible-3
+            git checkout ansible-3
+        План
+    // Переносим созданные плейбуки в раздельные роли
+        Роли
+        Ansible Galaxy
+        ansible-galaxy init
+            ansible-galaxy init app
+            ansible-galaxy init db
+            tree
+        Роль для базы данных
+            copy-paste
+        Роль для приложения
+            copy-paste
+        Вызов ролей
+            edit
+        Проверка ролей
+            terraform/stage> terraform destroy
+            terraform/stage> terraform apply -auto-approve
+            ansible-playbook site.yml --check
+            ansible-playbook site.yml
+        Проверим работу приложения
+            http://158.160.48.98:9292/  - work
+   // Описываем два окружения
+        Окружения
+            mkdir -p environments/stage
+            mkdir -p environments/prod
+        Inventory File
+            terraform/prod> terraform destroy
+            terraform/prod> terraform apply -auto-approve
+            edit ansible/environments/stage/inventory
+            edit ansible/environments/prod/inventory
+        Окружение по умолчанию
+            ansible-playbook -i environments/prod/inventory deploy.yml
+            edit ansible/ansible.cfg
+        Переменные групп хостов
+        Конфигурация Stage
+            copy-paste
+        Конфигурация Prod
+            copy-paste
+        Вывод информации об окружении
+            edit
+        Организуем плейбуки
+            mv, edit, ...
+        Улучшим файл ansible.cfg
+            edit
+        Проверка работы с окружениями
+            terraform/stage> terraform destroy
+            terraform/stage> terraform apply -auto-approve
+            ansible-playbook playbooks/site.yml --check
+        Настройка stage окружения
+            ansible-playbook playbooks/site.yml
+        Проверим работу приложения
+            http://51.250.64.139:9292/  - work
+        Настройка Prod окружения
+            terraform/stage> terraform destroy -auto-approve
+            ansible-playbook -i environments/prod/inventory playbooks/site.yml
+        Проверим работу приложения
+            http://158.160.119.92:9292/ - work
+    // Используем коммьюнити роль nginx
+        Работа с Community-ролями
+            edit environments/stage/requirements.yml и environments/prod/requirements.yml
+            ansible-galaxy install -r environments/stage/requirements.yml
+            добавим в .gitignore запись: jdauphant.nginx
+            edit  stage/group_vars/app и prod/group_vars/app
+        Самостоятельное задание
+            Добавьте в конфигурацию Terraform открытие 80 порта для инстанса приложения - не делалось. И так работает.
+            terraform/stage> terraform apply -auto-approve
+            ansible-playbook -i environments/stage/inventory playbooks/site.yml
+            http://51.250.84.154/ - work
+    // Используем Ansible Vault для наших окружений
+        Работа с Ansible Vault
+            edit vault.key
+            edit ansible.cfg
+            edit ansible/playbooks/users.yml
+            edit .gitignore
+            edit environments/prod/credentials.yml
+            edit environments/stage/credentials.yml
+            edit ansible/playbooks/site.yml
+            cat environments/prod/credentials.yml environments/stage/credentials.yml
+            ansible-playbook playbooks/site.yml --check
+                - Для редактирования переменных использовать команду: ansible-vault edit <file>
+                - А для расшифровки:                                  ansible-vault decrypt <file>
+            ansible-playbook playbooks/site.yml
+            ssh admin@51.250.91.208 - work
+            ssh admin@51.250.84.154 - work
+     // Задание со  ⭐: Работа с динамическим инвентори/
+            Пример проверки- работает -
+            ansible> ansible all -i environments/prod/myinv.sh -m ping
+            ansible> ansible all -i environments/stage/myinv.sh -m ping
+     // Задание с  ⭐ ⭐: Настройка TravisCI
+            не прорабатывалось
+         Проверка ДЗ
+
+## Как запустить проект:
+
+        terraform/stage> terraform apply -auto-approve
+        terraform/prod> terraform apply -auto-approve
+        ansible> ansible-playbook -i environments/stage/inventory playbooks/site.yml
+        ansible> ansible-playbook -i environments/prod/inventory playbooks/site.yml
+
+## Как проверить работоспособность:
+
+        Например, перейти по ссылке http://51.250.84.154/

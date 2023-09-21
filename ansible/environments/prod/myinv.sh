@@ -1,5 +1,8 @@
 #!/bin/bash
 
+ENV=prod
+
+
 if [ "$1" == "--list" ]; then
 
 tmplist=/tmp/ac_all_my_instance_list
@@ -14,7 +17,7 @@ echo '{
 echo -n '"db": {
 	 "hosts": ['
 	i=0
-	cat $tmplist | grep RUNNING  |  grep "\-db\-" | \
+	cat $tmplist | grep RUNNING  |  grep "\-db\-" |  grep "\-$ENV\-" | \
 	while read STR ; do
 		ip=$(echo $STR | awk '{print $10}')
 		i=$((i+1))
@@ -27,7 +30,7 @@ echo -n '"db": {
 echo -n '"app": {
 	 "hosts": ['
 	i=0
-	cat $tmplist | grep RUNNING  |  grep "\-app\-" | \
+	cat $tmplist | grep RUNNING  |  grep "\-app\-" | grep "\-$ENV\-" | \
 	while read STR ; do
 		ip=$(echo $STR | awk '{print $10}')
 		i=$((i+1))

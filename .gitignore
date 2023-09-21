@@ -16,6 +16,9 @@ config.tf
 
 *.retry
 
+jdauphant.nginx
+
+vault.key
 
 
 __pycache__/
