@@ -1,0 +1,20 @@
+[defaults]
+#inventory = ./inventory
+inventory = ./myinv.sh
+remote_user = ubuntu
+private_key_file = ~/.ssh/appuser
+host_key_checking = False
+retry_files_enabled = False
+
+[privilege_escalation]
+# Указать, использовать ли привилегированный доступ (sudo) по умолчанию
+become = True
+# Установить пользователя, от имени которого выполняется привилегированный доступ
+#become_user = root
+# Указать метод привилегированного доступа (sudo, su, pbrun и другие)
+# become_method = sudo
+
+[inventory]
+#enable_plugins = host_list, script, auto, yaml, ini, toml
+#enable_plugins =  script, host_list, auto, yaml, ini, toml
+#enable_plugins =  script

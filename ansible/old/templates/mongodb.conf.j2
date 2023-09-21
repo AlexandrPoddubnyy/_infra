@@ -1,0 +1,11 @@
+
+dbpath=/var/lib/mongodb
+
+logpath=/var/log/mongodb/mongodb.log
+
+logappend=true
+
+journal=true
+
+bind_ip = {{ mongo_bind_ip }}
+port = {{ mongo_port | default('27017') }}
