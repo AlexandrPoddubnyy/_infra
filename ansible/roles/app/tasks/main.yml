@@ -1,10 +1,9 @@
 ---
-- name: Configure App
-  hosts: app
-  become: true
-  vars:
-    db_host: 10.128.0.9
-  tasks:
+# tasks file for app
+    - name: Show info about the env this host belongs to
+      debug:
+        msg: "This host is in {{ env }} environment!!!"
+
     - name: Update repositories cache and install "git" package
 #      ansible.builtin.apt:
       apt:
@@ -12,12 +11,12 @@
         update_cache: yes
     - name: Add unit file for Puma
       copy:
-        src: files/puma.service
+        src: puma.service
         dest: /etc/systemd/system/puma.service
       notify: reload puma
     - name: Add config for DB connection
       template:
-        src: templates/db_config.j2
+        src: db_config.j2
 #	dest: /home/appuser/db_config
 #        owner: appuser
 #        group: appuser
@@ -40,6 +39,3 @@
 ##        chdir: /home/appuser/reddit
         chdir: /home/ubuntu/reddit
       notify: reload puma
-  handlers:
-    - name: reload puma
-      systemd: name=puma state=restarted
