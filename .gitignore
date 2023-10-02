@@ -28,7 +28,8 @@ vault.key
 .cache
 .pytest_cache
 
-
+.yamllint
+molecule/
 
 __pycache__/
 *.xlsx
