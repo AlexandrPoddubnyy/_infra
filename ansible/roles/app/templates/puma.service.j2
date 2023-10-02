@@ -3,10 +3,10 @@ Description=Puma HTTP Server
 After=network.target
 
 [Service]
-EnvironmentFile=/home/ubuntu/db_config
+EnvironmentFile=/home/{{ deploy_user }}/db_config
 Type=simple
-User=ubuntu
-WorkingDirectory=/home/ubuntu/reddit
+User={{ deploy_user }}
+WorkingDirectory=/home/{{ deploy_user }}/reddit
 ExecStart=/bin/bash -lc 'puma'
 Restart=always
 

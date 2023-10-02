@@ -4,38 +4,41 @@
       debug:
         msg: "This host is in {{ env }} environment!!!"
 
-    - name: Update repositories cache and install "git" package
-#      ansible.builtin.apt:
-      apt:
-        name: git
-        update_cache: yes
-    - name: Add unit file for Puma
-      copy:
-        src: puma.service
-        dest: /etc/systemd/system/puma.service
-      notify: reload puma
-    - name: Add config for DB connection
-      template:
-        src: db_config.j2
-#	dest: /home/appuser/db_config
-#        owner: appuser
-#        group: appuser
-        dest: /home/ubuntu/db_config
-        owner: ubuntu
-        group: ubuntu
-      notify: reload puma
-    - name: enable puma
-      systemd: name=puma enabled=yes
-    - name: Fetch the latest version of application code
-      git:
-        repo: 'https://github.com/express42/reddit.git'
-#        dest: /home/appuser/reddit
-        dest: /home/ubuntu/reddit
-        version: monolith
-      notify: reload puma
-    - name: Bundle install
-      bundler:
-        state: present
-##        chdir: /home/appuser/reddit
-        chdir: /home/ubuntu/reddit
-      notify: reload puma
+#    - name: Update repositories cache and install "git" package
+##      ansible.builtin.apt:
+#      apt:
+#        name: git
+#        update_cache: yes
+#    - name: Add unit file for Puma
+#      copy:
+#        src: puma.service
+#        dest: /etc/systemd/system/puma.service
+#      notify: reload puma
+#    - name: Add config for DB connection
+#      template:
+#        src: db_config.j2
+##	dest: /home/appuser/db_config
+##        owner: appuser
+##        group: appuser
+#        dest: /home/ubuntu/db_config
+#        owner: ubuntu
+#        group: ubuntu
+#      notify: reload puma
+#    - name: enable puma
+#      systemd: name=puma enabled=yes
+#    - name: Fetch the latest version of application code
+#      git:
+#        repo: 'https://github.com/express42/reddit.git'
+##        dest: /home/appuser/reddit
+#        dest: /home/ubuntu/reddit
+#        version: monolith
+#      notify: reload puma
+#    - name: Bundle install
+#      bundler:
+#        state: present
+###        chdir: /home/appuser/reddit
+#        chdir: /home/ubuntu/reddit
+#      notify: reload puma
+
+    - include: ruby.yml
+    - include: puma.yml

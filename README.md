@@ -373,7 +373,7 @@ AlexandrPoddubnyy Infra repository
             ansible-playbook site.yml
         Проверим работу приложения
             http://158.160.48.98:9292/  - work
-   // Описываем два окружения
+    // Описываем два окружения
         Окружения
             mkdir -p environments/stage
             mkdir -p environments/prod
@@ -428,6 +428,8 @@ AlexandrPoddubnyy Infra repository
             edit .gitignore
             edit environments/prod/credentials.yml
             edit environments/stage/credentials.yml
+            ansible-vault encrypt environments/prod/credentials.yml
+            ansible-vault encrypt environments/stage/credentials.yml
             edit ansible/playbooks/site.yml
             cat environments/prod/credentials.yml environments/stage/credentials.yml
             ansible-playbook playbooks/site.yml --check
@@ -436,11 +438,11 @@ AlexandrPoddubnyy Infra repository
             ansible-playbook playbooks/site.yml
             ssh admin@51.250.91.208 - work
             ssh admin@51.250.84.154 - work
-     // Задание со  ⭐: Работа с динамическим инвентори/
+    // Задание со  ⭐: Работа с динамическим инвентори/
             Пример проверки- работает -
             ansible> ansible all -i environments/prod/myinv.sh -m ping
             ansible> ansible all -i environments/stage/myinv.sh -m ping
-     // Задание с  ⭐ ⭐: Настройка TravisCI
+    // Задание с  ⭐ ⭐: Настройка TravisCI
             не прорабатывалось
          Проверка ДЗ
 
@@ -454,3 +456,25 @@ AlexandrPoddubnyy Infra repository
 ## Как проверить работоспособность:
 
         Например, перейти по ссылке http://51.250.84.154/
+
+
+====================
+Домашнее задание №11:
+====================
+
+## В процессе сделано:
+
+    Кратко:
+        Локальная разработка при помощи Vagrant, доработка ролей для провижининга в Vagrant
+            Первое задание со *
+        Тестирование ролей при помощи Molecule и Testinfra        - проработаны намётки, заготовки. Всё сильно отличается от того что в материалах к DZ и в текущих реалиях. В github не вносил.
+        Переключение сбора образов пакером на использование ролей - нет
+        Подключение Travis CI для автоматического прогона тестов  - нет
+
+## Как запустить проект:
+
+        _infra> vagrant up
+
+## Как проверить работоспособность:
+
+        Например, перейти по ссылке http://10.10.10.20/

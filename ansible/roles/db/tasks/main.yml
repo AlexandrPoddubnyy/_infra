@@ -4,15 +4,18 @@
       debug:
         msg: "This host is in {{ env }} environment!!!"
 
-#    - name: Change mongo config file
+##    - name: Change mongo config file
+##      template:
+##        src: mongod.conf.j2
+##        dest: /etc/mongod.conf
+##        mode: 0644
+##      notify: restart mongod
+#    - name: Change mongoDB config file
 #      template:
-#        src: mongod.conf.j2
-#        dest: /etc/mongod.conf
+#        src: mongodb.conf.j2
+#        dest: /etc/mongodb.conf
 #        mode: 0644
-#      notify: restart mongod
-    - name: Change mongoDB config file
-      template:
-        src: mongodb.conf.j2
-        dest: /etc/mongodb.conf
-        mode: 0644
-      notify: restart mongodb
+#      notify: restart mongodb
+
+    - include: install_mongo.yml
+    - include: config_mongo.yml
