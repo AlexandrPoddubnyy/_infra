@@ -1,0 +1,32 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Example assertion
+    assert:
+      that: true
+
+#  - name: "stat /file.txt exists"
+#    stat:
+#      path: "/file.txt"
+#    register: file_txt_stat
+#  - name: "check if /file.txt exists"
+#    assert:
+#      that:
+#        - file_txt_stat.stat.exists == True
+#      success_msg: "/file.txt exists"
+#      fail_msg: "/file.txt doesn't exist"
+
+  - name: "stat /etc/mongodb.conf exists"
+    stat:
+      path: "/etc/mongodb.conf"
+    register: mongodb_conf
+  - name: "check if /etc/mongodb.conf exists"
+    assert:
+      that:
+        - mongodb_conf.stat.exists == True
+      success_msg: "/etc/mongodb.conf exists"
+      fail_msg: "/etc/mongodb.conf doesn't exist"
