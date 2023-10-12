@@ -29,6 +29,6 @@ source "yandex" "ubuntu16" {
 build {
   sources = ["source.yandex.ubuntu16"]
   provisioner "ansible" {
-     playbook_file = "ansible/playbooks/packer_app.yml"
+     playbook_file = "ansible/playbooks/packer_app.ORIG.yml"
   }
 }

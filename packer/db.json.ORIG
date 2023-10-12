@@ -5,7 +5,7 @@
               "service_account_key_file": "{{user `service_account_key_file`}}",
               "folder_id": "{{user `folder_id`}}",
               "source_image_family": "{{user `source_image_family`}}",
-              "image_name": "db-js2-ansible-{{timestamp}}",
+              "image_name": "mongo-basejson-ansible-${formatdate(\"MM-DD-YYYY\", timestamp())}",
               "image_family": "mongo-basejson",
               "ssh_username": "{{user `ssh_username`}}",
               "platform_id": "standard-v1",
@@ -15,8 +15,7 @@
   "provisioners": [
      {
       "type": "ansible",
-      "ansible_env_vars": ["ANSIBLE_ROLES_PATH={{ pwd }}/ansible/roles"],
-      "playbook_file": "ansible/playbooks/packer_db.yml"
+      "playbook_file": "ansible/playbooks/packer_db.ORIG.yml"
      }
   ]
 }
